@@ -3,10 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="t" class="day1.demo1.entity.Teacher"/>
-    <bean id="s1" class="day1.demo1.entity.Stu">
-        <property name="name" value="张三"/>
-        <property name="t" ref="t"/>
+    <bean lazy-init="true" id="u1" class="day1.demo2.entity.User">
+
     </bean>
 
 </beans>
