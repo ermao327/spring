@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans   xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name = "e1" class="day1.demo3.Emp">
+        <!--setName-->
+        <property name="name" value="a1"/>
+        <property name="age" value="23"/>
+        <property name="d" ref="d"/>
+        <property name="list">
+            <list>
+                <value type="java.lang.Integer" >1</value>
+                <value type="java.lang.Integer" >2</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="d" class="day1.demo3.Dog"/>
+
+    <bean name="e2" class="day1.demo3.Emp">
+        <constructor-arg index="0">
+            <value>tom</value>
+        </constructor-arg>
+    </bean>
+
+</beans>
