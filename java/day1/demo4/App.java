@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.nio.channels.NonReadableChannelException;
+import java.util.TreeMap;
+
 public class App {
 
     ClassPathXmlApplicationContext a;
@@ -23,7 +26,8 @@ public class App {
         System.out.println(a.getBean(Person.class).name);
         System.out.println(a.getBean(Person.class).age);
         System.out.println("----------------------------------------------------");
-
+        System.out.println(a.getBean(UserServiceImpl.class));
+        System.out.println(a.getBean("service"));
 
     }
 

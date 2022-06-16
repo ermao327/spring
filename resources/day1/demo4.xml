@@ -8,5 +8,7 @@
 <!--    <bean name="p1" class="day1.demo4.Person">-->
 
 <!--    </bean>-->
+    <context:property-placeholder location="classpath:day1/a.properties"/><!--@Value配置文件-->
+
 
 </beans>

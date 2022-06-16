@@ -16,6 +16,6 @@ public class UserServiceImpl {
 //    //    2.resource
 //    @Resource
     Person p;
-    @Value("zhangsan")
+    @Value("${name}")
     String name;
 }
