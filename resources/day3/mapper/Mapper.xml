@@ -1,0 +1,16 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day3.dao.AccountDao">
+    <insert id="insert">
+        insert into account (name,money) values (#{name},#{money})
+    </insert>
+
+    <update id="update">
+        update account set money=money+#{money} where name=#{from}
+    </update>
+    <select id="selectMoney" resultType="java.lang.Double">
+        select money from account where name=#{n}
+    </select>
+    <select id="selectAllAccount" resultType="day3.entity.Account">
+        select * from account;
+    </select>
+</mapper>

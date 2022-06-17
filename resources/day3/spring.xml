@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- 1.指定日志 -->
+    <bean id="cfg" class="org.apache.ibatis.session.Configuration">
+        <property name="logImpl" value="org.apache.ibatis.logging.stdout.StdOutImpl"/>
+    </bean>
+    <context:property-placeholder location="day3/driver.properties"/>
+    <context:component-scan base-package="day3"/><!--扫包路径-->
+    <!-- 2.指定数据源 -->
+    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${pass}"/>
+        <property name="initialSize" value="${initialSize}"></property>
+    </bean>
+    <!-- 3.指定session工厂 -->
+    <bean id="sf" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configuration" ref="cfg"/>
+        <property name="dataSource" ref="ds"></property>
+        <!--注册mapper文件,可一项项的写，如果很多个，可用通配符 value="classpath:mapper/userMapper.xml"-->
+        <!-- <property name="mapperLocations" value="classpath:*.xml"/> -->
+        <property name="mapperLocations"  value="classpath:day3/mapper/*Mapper.xml"/>
+        <!-- 指定包的别名，可不写 -->
+        <property name="typeAliasesPackage" value="day3.entity"></property>
+    </bean>
+    <!-- 4. 为mapper文件生成代理类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定为上面的sqlSessionFactory对象,注意这里value为string类型  -->
+        <property name="sqlSessionFactoryBeanName" value="sf"/>
+        <!--指定要产生哪些dao,指定包名，会自动扫描包，并实现该包下所有的接口  -->
+        <property name="basePackage" value="day3.dao"/>
+    </bean>
+    <!--5.配置事务-->
+    <tx:annotation-driven transaction-manager="tm"/>
+    <bean id="tm" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ds"/>
+    </bean>
+</beans>
